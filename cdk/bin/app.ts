@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+import 'source-map-support/register';
+import * as cdk from 'aws-cdk-lib';
+import { WebsiteStack } from '../lib/website-stack';
+
+const app = new cdk.App();
+new WebsiteStack(app, 'rs-toy-shop-cdk', {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION || 'eu-east-1',
+  },
+  description: 'Static rs-school website hosting with S3 and CloudFront',
+});
