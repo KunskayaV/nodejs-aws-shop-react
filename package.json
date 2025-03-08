@@ -15,6 +15,7 @@
     "cdk:watch": "tsc -w",
     "cdk:start": "cdk",
     "cdk:deploy": "npm run build && cdk deploy",
+    "cdk:deploy:dev": "npm run build && cdk deploy --hotswap",
     "cdk:destroy": "cdk destroy",
     "cdk:bootstrap": "cdk bootstrap",
     "cdk:diff": "cdk diff"
