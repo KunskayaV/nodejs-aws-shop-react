@@ -7,12 +7,31 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
+import axios from "axios";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: { refetchOnWindowFocus: false, retry: false, staleTime: Infinity },
   },
 });
+
+// Set up Axios interceptor
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          alert("Unauthorized: please provide authorization");
+          break;
+        case 403:
+          alert("Forbidden: not enough permissions");
+          break;
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 (async () => {
   if (import.meta.env.DEV) {
